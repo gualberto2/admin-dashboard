@@ -22,13 +22,14 @@ const SettingsPage: React.FC<SettingsPageProps> = async ({ params }) => {
     },
   });
 
+  //Check if store even exists, not: redirect to home page
   if (!store) {
     redirect("/");
   }
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <SettingsForm />
+        <SettingsForm initialData={store} />
       </div>
     </div>
   );
