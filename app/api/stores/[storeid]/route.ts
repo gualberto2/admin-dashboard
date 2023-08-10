@@ -53,7 +53,7 @@ export async function DELETE(
       return new NextResponse("Unauthenticated", { status: 403 });
     }
 
-    if (!params.storeId) {
+    if (params.storeId) {
       return new NextResponse("Store id is required", { status: 400 });
     }
 
