@@ -68,8 +68,8 @@ export async function DELETE(
       return new NextResponse("Unauthenticated", { status: 403 });
     }
 
-    //Checks if there is a billboard ID/ No ID
-    if (params.billboardId) {
+    //Checks if there is no billboard ID
+    if (!params.billboardId) {
       return new NextResponse("Billboard id is required", { status: 400 });
     }
 
@@ -104,7 +104,7 @@ export async function GET(
         id: params.billboardId,
       },
     });
-    if (params.billboardId) {
+    if (!params.billboardId) {
       return new NextResponse("Billboard id is required", { status: 400 });
     }
 

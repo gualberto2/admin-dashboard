@@ -22,9 +22,8 @@ import {
 } from "@/components/ui/form";
 import { Separator } from "@/components/ui/separator";
 import { Heading } from "@/components/ui/heading";
-
-import { ApiAlert } from "@/components/ui/api-alert";
 import { AlertModal } from "@/components/modals/alert-modals";
+import { ApiAlert } from "@/components/ui/api-alert";
 import { useOrigin } from "@/hooks/new-origin";
 
 const formSchema = z.object({
@@ -70,7 +69,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
       router.refresh();
       router.push("/");
       toast.success("Store deleted.");
-    } catch (error) {
+    } catch (error: any) {
       toast.error("Make sure you removed all products and categories first.");
     } finally {
       setLoading(false);
@@ -134,7 +133,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
       <ApiAlert
         title="NEXT_PUBLIC_API_URL"
         variant="public"
-        description={`${origin}/api/${params.storeId}}`}
+        description={`${origin}/api/${params.storeId}`}
       />
     </>
   );
