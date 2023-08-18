@@ -2,6 +2,7 @@ import { Copy, Server } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge, BadgeProps } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { toast } from "react-hot-toast";
 
 interface ApiAlertProps {
   title: string;
@@ -9,15 +10,12 @@ interface ApiAlertProps {
   variant?: "public" | "admin";
 }
 
-const textMap: Record<NonNullable<ApiAlertProps["variant"]>, string> = {
+const textMap: Record<ApiAlertProps["variant"], string> = {
   public: "Public",
   admin: "Admin",
 };
 
-const variantMap: Record<
-  NonNullable<ApiAlertProps["variant"]>,
-  BadgeProps["variant"]
-> = {
+const variantMap: Record<ApiAlertProps["variant"], BadgeProps["variant"]> = {
   public: "secondary",
   admin: "destructive",
 };
@@ -42,7 +40,12 @@ export const ApiAlert: React.FC<ApiAlertProps> = ({
         <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
           {description}
         </code>
-        <Button className="" variant="outline" size="icon" onClick={onCopy}>
+        <Button
+          className=""
+          variant="outline"
+          size="icon"
+          onClick={() => onCopy(description)}
+        >
           <Copy className="h-4 w-4" />
         </Button>
       </AlertDescription>
