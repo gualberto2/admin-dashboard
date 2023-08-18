@@ -36,7 +36,7 @@ export async function DELETE(
       return new NextResponse("Unauthenticated", { status: 403 });
     }
 
-    if (params.billboardId) {
+    if (!params.billboardId) {
       return new NextResponse("Billboard id is required", { status: 400 });
     }
 
@@ -87,7 +87,7 @@ export async function PATCH(
       return new NextResponse("Image URL is required", { status: 400 });
     }
 
-    if (params.billboardId) {
+    if (!params.billboardId) {
       return new NextResponse("Billboard id is required", { status: 400 });
     }
 
