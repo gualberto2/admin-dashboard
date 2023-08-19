@@ -75,7 +75,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           <DropdownMenuItem onClick={() => onCopy(data.id)}>
             <Copy className="mr-2 w-4 h-4" /> Copy ID
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setOpen(open)}>
+          <DropdownMenuItem onClick={() => setOpen(true)}>
             <Trash className="mr-2 w-4 h-4" /> Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
