@@ -32,7 +32,7 @@ import {
 } from "@/components/ui/select";
 
 const formSchema = z.object({
-  name: z.string().min(1),
+  name: z.string().min(2),
   billboardId: z.string().min(1),
 });
 
@@ -150,7 +150,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
                   <FormMessage />
                 </FormItem>
               )}
-            />{" "}
+            />
             <FormField
               control={form.control}
               name="billboardId"
@@ -179,7 +179,6 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
                       ))}
                     </SelectContent>
                   </Select>
-
                   <FormMessage />
                 </FormItem>
               )}
