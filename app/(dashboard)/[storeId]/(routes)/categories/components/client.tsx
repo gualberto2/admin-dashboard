@@ -14,7 +14,7 @@ interface CategoryClientProps {
   data: CategoryColumn[];
 }
 
-export const CategoryClient: React.FC<CategoryClientProps> = ({ data }) => {
+export const CategoriesClient: React.FC<CategoryClientProps> = ({ data }) => {
   const router = useRouter();
   const params = useParams();
   return (
