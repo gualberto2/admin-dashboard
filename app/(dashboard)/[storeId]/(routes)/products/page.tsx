@@ -14,12 +14,11 @@ const ProductsPage = async ({ params }: { params: { storeId: string } }) => {
     include: {
       category: true,
       size: true,
-      color: true.
+      color: true,
     },
     orderBy: {
       createdAt: "desc",
     },
-
   });
 
   const formattedProducts: ProductColumn[] = products.map((item) => ({
