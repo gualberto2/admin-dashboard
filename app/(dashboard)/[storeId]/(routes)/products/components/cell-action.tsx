@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { BillboardColumn } from "./columns";
+import { ProductColumn } from "./columns";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,7 +18,7 @@ import axios from "axios";
 import { AlertModal } from "@/components/modals/alert-modals";
 
 interface CellActionProps {
-  data: BillboardColumn;
+  data: ProductColumn;
 }
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const [loading, setLoading] = useState(false);
@@ -29,7 +29,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
-    toast.success("Billboard ID copied to clipboard");
+    toast.success("Product ID copied to clipboard");
   };
 
   const onDelete = async () => {
