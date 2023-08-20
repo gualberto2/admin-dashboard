@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { SizeColumn } from "./columns";
+import { ColorColumn } from "./columns";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,7 +18,7 @@ import axios from "axios";
 import { AlertModal } from "@/components/modals/alert-modals";
 
 interface CellActionProps {
-  data: SizeColumn;
+  data: ColorColumn;
 }
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const [loading, setLoading] = useState(false);
@@ -29,18 +29,18 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
-    toast.success("Size ID copied to clipboard");
+    toast.success("Color ID copied to clipboard");
   };
 
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/sizes/${data.id}`);
+      await axios.delete(`/api/${params.storeId}/colors/${data.id}`);
       router.refresh();
-      router.push(`/${params.storeId}/sizes`);
-      toast.success("Size deleted.");
+      router.push(`/${params.storeId}/colors`);
+      toast.success("Color deleted.");
     } catch (error: any) {
-      toast.error("Make sure you removed all products using this size first.");
+      toast.error("Make sure you removed all products using this color first.");
     } finally {
       setLoading(false);
       setOpen(false);
@@ -65,7 +65,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem
-            onClick={() => router.push(`/${params.storeId}/sizes/${data.id}`)}
+            onClick={() => router.push(`/${params.storeId}/colors/${data.id}`)}
           >
             <Edit className="mr-2 w-4 h-4" /> Update
           </DropdownMenuItem>
