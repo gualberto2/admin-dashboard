@@ -13,6 +13,7 @@ const corsHeaders = {
 export async function OPTIONS() {
   return NextResponse.json({}, { headers: corsHeaders });
 }
+
 export async function POST(
   req: Request,
   { params }: { params: { storeId: string } }
@@ -22,6 +23,7 @@ export async function POST(
   if (!productIds || productIds.length === 0) {
     return new NextResponse("Product ids are required", { status: 400 });
   }
+
   const products = await prismadb.product.findMany({
     where: {
       id: {
