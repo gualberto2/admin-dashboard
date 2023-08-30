@@ -5,10 +5,10 @@ import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { Order } from "@prisma/client";
 
-import { columns } from "./columns";
+import { OrderColumn, columns } from "./columns";
 
 interface OrderClientProps {
-  data: Order[];
+  data: OrderColumn[];
 }
 
 export const OrderClient: React.FC<OrderClientProps> = ({ data }) => {
