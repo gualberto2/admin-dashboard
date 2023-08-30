@@ -24,7 +24,6 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Heading } from "@/components/ui/heading";
 import { AlertModal } from "@/components/modals/alert-modals";
-import ImageUpload from "@/components/ui/image-upload";
 import {
   Select,
   SelectContent,
@@ -32,6 +31,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import ImageUpload from "@/components/ui/image-upload";
 import { Checkbox } from "@/components/ui/checkbox";
 
 const formSchema = z.object({
@@ -39,8 +39,8 @@ const formSchema = z.object({
   images: z.object({ url: z.string() }).array(),
   price: z.coerce.number().min(1),
   categoryId: z.string().min(1),
-  sizeId: z.string().min(1),
   colorId: z.string().min(1),
+  sizeId: z.string().min(1),
   isFeatured: z.boolean().default(false).optional(),
   isArchived: z.boolean().default(false).optional(),
 });
@@ -61,8 +61,8 @@ interface ProductFormProps {
 export const ProductForm: React.FC<ProductFormProps> = ({
   initialData,
   categories,
-  colors,
   sizes,
+  colors,
 }) => {
   const params = useParams();
   const router = useRouter();
@@ -75,23 +75,25 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   const toastMessage = initialData ? "Product updated." : "Product created.";
   const action = initialData ? "Save changes" : "Create";
 
+  const defaultValues = initialData
+    ? {
+        ...initialData,
+        price: parseFloat(String(initialData?.price)),
+      }
+    : {
+        name: "",
+        images: [],
+        price: 0,
+        categoryId: "",
+        colorId: "",
+        sizeId: "",
+        isFeatured: false,
+        isArchived: false,
+      };
+
   const form = useForm<ProductFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData
-      ? {
-          ...initialData,
-          price: parseFloat(String(initialData?.price)),
-        }
-      : {
-          name: "",
-          images: {},
-          price: 0,
-          categoryId: "",
-          colorId: "",
-          sizeId: "",
-          isFeatured: false,
-          isArchived: false,
-        },
+    defaultValues,
   });
 
   const onSubmit = async (data: ProductFormValues) => {
@@ -123,7 +125,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
       router.push(`/${params.storeId}/products`);
       toast.success("Product deleted.");
     } catch (error: any) {
-      toast.error("Something went wrong");
+      toast.error("Something went wrong.");
     } finally {
       setLoading(false);
       setOpen(false);
@@ -165,18 +167,10 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                 <FormLabel>Images</FormLabel>
                 <FormControl>
                   <ImageUpload
-                    value={
-                      Array.isArray(field.value)
-                        ? field.value.map((image) => image.url)
-                        : []
-                    }
+                    value={field.value.map((image) => image.url)}
                     disabled={loading}
                     onChange={(url) =>
-                      field.onChange(
-                        Array.isArray(field.value)
-                          ? [...field.value, { url }]
-                          : [{ url }]
-                      )
+                      field.onChange([...field.value, { url }])
                     }
                     onRemove={(url) =>
                       field.onChange([
